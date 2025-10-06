@@ -46,17 +46,11 @@ int main() {
   float rating;
   string comment;
 
-  // I put both lower case and upper case Y
-  if (multiple != 'y' || multiple != 'Y' || multiple != 'n' ||
-      multiple != 'N') {
-    cout << "Invalid input. \n";
-  }
-
   while (multiple == 'y' || multiple == 'Y') {
     cout << "Enter review rating 0-5: ";
     cin >> rating;
     while (rating > max_rating || rating < min_rating) {
-      cout << "ERROR: Rating must be between 0.0 and 5.0. Try again: \n";
+      cout << "ERROR: Rating must be between 0.0 and 5.0. Try again: ";
       cin >> rating;
     }
     cout << "Enter review comments: ";
@@ -89,7 +83,16 @@ int main() {
     cout << "Enter another review? Y/N: ";
     cin >> multiple;
     cin.ignore();
+
+    // I put both lower case and upper case Y
+    while (multiple != 'y' && multiple != 'Y' && multiple != 'n' &&
+           multiple != 'N') {
+      cout << "ERROR: Please enter Y or N: \n";
+      cin >> multiple;
+      cin.ignore();
+    }
   }
+
   // call displayReview to display the review
   displayReview(head);
 
@@ -116,11 +119,13 @@ void displayReview(ReviewNode* head) {
   // then starts the review counter at 0 for
   int count = 0;
   float total = 0.0;
+  cout << "Outputting all reviews:\n";
+
   ReviewNode* current = head;
 
   while (current != nullptr) {
     count++;
-    cout << "Review #" << count << ": " << current->rating << ": "
+    cout << "   >Review #" << count << ": " << current->rating << ": "
          << current->comment << "\n";
     total = total + current->rating;
     current = current->next;
