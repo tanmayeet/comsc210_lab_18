@@ -15,10 +15,22 @@ struct ReviewNode {
   ReviewNode* next;
 };
 
-void output(Node*);  //
+void displayReview(ReviewNode* head) {
+  // Checks if the list is empty
+  if (head == nullptr) {
+    cout << "Empty. \n";
+    return;
+  }
+
+  int count = 0;
+  float total = 0.0;
+  ReviewNode* current = head;
+
+  while (current != nullptr) {
+  }
+}
 
 int main() {
-  Node* head = nullptr;
   int choice;
   cout << "Which linked list method should we use?\n";
   cout << "   [1] New nodes are added at the head of the linked list";
