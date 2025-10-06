@@ -15,7 +15,7 @@ struct ReviewNode {
   ReviewNode* next;
 };
 
-/// ghewgbrjwg
+/// ghewgbrjwga
 class ReviewList {
  private:
   ReviewNode* head;
