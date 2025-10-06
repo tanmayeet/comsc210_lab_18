@@ -20,6 +20,7 @@ class ReviewList {
   ReviewNode* head;
   ReviewNode* tail;
   bool addToHead;
+  ////
 
  public:
   ReviewList(bool mode) {
