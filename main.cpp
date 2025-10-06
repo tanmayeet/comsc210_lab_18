@@ -67,9 +67,16 @@ int main() {
   string comment;
 
   while (multiple == 'y' || multiple == 'Y') {
-    cout << "Enter review rating 0-5: \n";
+    cout << "Enter review rating 0-5: ";
     cin >> rating;
+    while (rating > max || rating < min) {
+      cout << "ERROR: Rating must be between 0.0 and 5.0. Try again: ";
+      cin >> rating;
+    }
+    cout << "Enter review comments: ";
+    cin >> comment;
+    cout << "Enter another review? Y/N: ";
+    cin >> multiple;
   }
-
   return 0;
 }
