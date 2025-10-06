@@ -5,6 +5,7 @@
 #include <string>
 using namespace std;
 
+// constant values for minimum and maximum ratings
 const float min_rating = 0.0;
 const float max_rating = 5.0;
 
@@ -19,25 +20,37 @@ struct ReviewNode {
 void displayReview(ReviewNode* head);
 
 int main() {
-  int choice;
+  int choice;  // choice for head or tail
   cout << "Which linked list method should we use?\n";
   cout << "   [1] New nodes are added at the head of the linked list\n";
   cout << "   [2] New nodes are added at the tail of the linked list\n";
   cout << "   Choice: ";
   cin >> choice;
 
+  // input validation if someone puts in another value other than 1 or 2
   while (choice != 1 && choice != 2) {
     cout << "ERROR: Please enter 1 or 2.\nChoice: ";
     cin >> choice;
   }
 
+  // sets true to 1
   bool addToHead = (choice == 1);
 
+  // sets head and tail to null pointers
   ReviewNode* head = nullptr;
   ReviewNode* tail = nullptr;
+
+  // initialized some variables for input validation and checking for more
+  // reviews
   char multiple = 'y';
   float rating;
   string comment;
+
+  // I put both lower case and upper case Y
+  if (multiple != 'y' || multiple != 'Y' || multiple != 'n' ||
+      multiple != 'N') {
+    cout << "Invalid input. \n";
+  }
 
   while (multiple == 'y' || multiple == 'Y') {
     cout << "Enter review rating 0-5: ";
@@ -49,17 +62,20 @@ int main() {
     cout << "Enter review comments: ";
     cin >> comment;
 
+    // created a new Node
     ReviewNode* newNode = new ReviewNode;
     newNode->rating = rating;
     newNode->comment = comment;
     newNode->next = nullptr;
 
+    // checks if addToHead is true or 1 and adds to the head
     if (addToHead == true) {
       newNode->next = head;
       head = newNode;
       if (tail == nullptr) {
         tail = newNode;
       }
+      // else (if it is 2) it adds to the tail
     } else {
       if (head == nullptr) {
         head = newNode;
@@ -74,7 +90,7 @@ int main() {
     cin >> multiple;
     cin.ignore();
   }
-
+  // call displayReview to display the review
   displayReview(head);
 
   // deleting nodes
