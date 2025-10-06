@@ -27,4 +27,19 @@ class ReviewList {
   void displayReviews();
 };
 
-int main() { return 0; }
+int main() {
+  int choice;
+  cout << "Which linked list method should we use?\n";
+  cout << "   [1] New nodes are added at the head of the linked list";
+  cout << "   [2] New nodes are added at the tail of the linked list";
+  cout << "   Choice: ";
+  cin >> choice;
+
+  while (choice != 1 && choice != 2) {
+    cout << "ERROR: Please enter 1 or 2.\nChoice: ";
+    cin >> choice;
+  }
+
+  bool addToHead = (choice == 1);
+  return 0;
+}
