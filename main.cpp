@@ -5,8 +5,8 @@
 #include <string>
 using namespace std;
 
-const float min = 0.0;
-const float max = 5.0;
+const float min_rating = 0.0;
+const float max_rating = 5.0;
 
 // Struct with review attributes
 struct ReviewNode {
@@ -15,35 +15,8 @@ struct ReviewNode {
   ReviewNode* next;
 };
 
-// displayReview outputs the review
-// arguments: ReviewNode* head
-// returns: nothing
-void displayReview(ReviewNode* head) {
-  // First checks if the list is empty
-  if (head == nullptr) {
-    cout << "Empty. \n";
-    return;
-  }
-
-  // then starts the review counter at 0 for
-  int count = 0;
-  float total = 0.0;
-  ReviewNode* current = head;
-
-  while (current != nullptr) {
-    count++;
-    cout << "Review #" << count << ": " << current->rating << ": "
-         << current->comment << "\n";
-    total = total * current->rating;
-    current = current->next;
-  }
-  if (count > 0) {
-    float average = total / count;
-    cout << "Average rating: " << average << "\n";
-  } else {
-    cout << "No reviews to average.\n";
-  }
-}
+// Function prototypes
+void displayReview(ReviewNode* head);
 
 int main() {
   int choice;
@@ -69,14 +42,77 @@ int main() {
   while (multiple == 'y' || multiple == 'Y') {
     cout << "Enter review rating 0-5: ";
     cin >> rating;
-    while (rating > max || rating < min) {
-      cout << "ERROR: Rating must be between 0.0 and 5.0. Try again: ";
+    while (rating > max_rating || rating < min_rating) {
+      cout << "ERROR: Rating must be between 0.0 and 5.0. Try again: \n";
       cin >> rating;
     }
     cout << "Enter review comments: ";
-    cin >> comment;
+    getline(cin, comment);
+
+    ReviewNode* newNode = new ReviewNode;
+    newNode->rating = rating;
+    newNode->comment = comment;
+    newNode->next = nullptr;
+
+    if (addToHead == true) {
+      newNode->next = head;
+      head = newNode;
+      if (tail == nullptr) {
+        tail = newNode;
+      }
+    } else {
+      if (head == nullptr) {
+        head = newNode;
+        tail = newNode;
+      } else {
+        tail->next = newNode;
+        tail = newNode;
+      }
+    }
+
     cout << "Enter another review? Y/N: ";
     cin >> multiple;
+    cin.ignore();
   }
+
+  displayReview(head);
+
+  // deleting nodes
+  ReviewNode* current = head;
+  while (current != nullptr) {
+    ReviewNode* temp = current;
+    current = current->next;
+    delete temp;
+  }
+
   return 0;
+}
+// displayReview outputs the review
+// arguments: ReviewNode* head
+// returns: nothing
+void displayReview(ReviewNode* head) {
+  // First checks if the list is empty
+  if (head == nullptr) {
+    cout << "Empty. \n";
+    return;
+  }
+
+  // then starts the review counter at 0 for
+  int count = 0;
+  float total = 0.0;
+  ReviewNode* current = head;
+
+  while (current != nullptr) {
+    count++;
+    cout << "Review #" << count << ": " << current->rating << ": "
+         << current->comment << "\n";
+    total = total + current->rating;
+    current = current->next;
+  }
+  if (count > 0) {
+    float average = total / count;
+    cout << "Average rating: " << average << "\n";
+  } else {
+    cout << "No reviews to average.\n";
+  }
 }
