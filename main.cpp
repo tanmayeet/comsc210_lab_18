@@ -15,20 +15,10 @@ struct ReviewNode {
   ReviewNode* next;
 };
 
-/// ghewgbrjwga
-class ReviewList {
- private:
-  ReviewNode* head;
-  ReviewNode* tail;
-  bool addToHead;
-
- public:
-  ReviewList(bool mode);
-  void addReview(float rating, string comment);
-  void displayReviews();
-};
+void output(Node*);  //
 
 int main() {
+  Node* head = nullptr;
   int choice;
   cout << "Which linked list method should we use?\n";
   cout << "   [1] New nodes are added at the head of the linked list";
