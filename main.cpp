@@ -20,13 +20,11 @@ class ReviewList {
   ReviewNode* head;
   ReviewNode* tail;
   bool addToHead;
-  ////
 
  public:
-  ReviewList(bool mode) {
-    head = nullptr;
-    tail = nullptr;
-  }
+  ReviewList(bool mode);
+  void addReview(float rating, string comment);
+  void displayReviews();
 };
 
 int main() { return 0; }
