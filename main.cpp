@@ -15,18 +15,33 @@ struct ReviewNode {
   ReviewNode* next;
 };
 
+// displayReview outputs the review
+// arguments: ReviewNode* head
+// returns: nothing
 void displayReview(ReviewNode* head) {
-  // Checks if the list is empty
+  // First checks if the list is empty
   if (head == nullptr) {
     cout << "Empty. \n";
     return;
   }
 
+  // then starts the review counter at 0 for
   int count = 0;
   float total = 0.0;
   ReviewNode* current = head;
 
   while (current != nullptr) {
+    count++;
+    cout << "Review #" << count << ": " << current->rating << ": "
+         << current->comment << "\n";
+    total = total * current->rating;
+    current = current->next;
+  }
+  if (count > 0) {
+    float average = total / count;
+    cout << "Average rating: " << average << "\n";
+  } else {
+    cout << "No reviews to average.\n";
   }
 }
 
@@ -44,5 +59,17 @@ int main() {
   }
 
   bool addToHead = (choice == 1);
+
+  ReviewNode* head = nullptr;
+  ReviewNode* tail = nullptr;
+  char multiple = 'y';
+  float rating;
+  string comment;
+
+  while (multiple == 'y' || multiple == 'Y') {
+    cout << "Enter review rating 0-5: \n";
+    cin >> rating;
+  }
+
   return 0;
 }
