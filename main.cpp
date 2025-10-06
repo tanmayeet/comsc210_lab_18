@@ -21,8 +21,8 @@ void displayReview(ReviewNode* head);
 int main() {
   int choice;
   cout << "Which linked list method should we use?\n";
-  cout << "   [1] New nodes are added at the head of the linked list";
-  cout << "   [2] New nodes are added at the tail of the linked list";
+  cout << "   [1] New nodes are added at the head of the linked list\n";
+  cout << "   [2] New nodes are added at the tail of the linked list\n";
   cout << "   Choice: ";
   cin >> choice;
 
@@ -47,7 +47,7 @@ int main() {
       cin >> rating;
     }
     cout << "Enter review comments: ";
-    getline(cin, comment);
+    cin >> comment;
 
     ReviewNode* newNode = new ReviewNode;
     newNode->rating = rating;
